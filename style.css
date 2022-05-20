@@ -4,7 +4,6 @@ https://coolors.co/2f4858-33658a-86bbd8-f6ae2d-f26419
 
 body {
     position: relative;
-    width: 900px;
     margin: 0 auto;
     text-align: center;
     background-color: #33658A;
@@ -26,7 +25,6 @@ html, body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;
     background-color: #86BBD8;
     padding: 60px 100px; 
     border-radius: 5px;
@@ -62,7 +60,8 @@ html, body {
 h3 {
     position: absolute;
     font-size: 5rem;
-    left: 0;
+    left: 30px;
+    margin-top: 0;
 }
 
 button:disabled {
