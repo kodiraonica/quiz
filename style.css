@@ -4,12 +4,19 @@ https://coolors.co/2f4858-33658a-86bbd8-f6ae2d-f26419
 
 :root {
   --clr-bckg: #33658a;
+  --clr-button-bckg: #86bbd8;
+  --clr-button: #f6ae2d;
 }
 
 * {
+  box-sizing: border-box;
+}
+
+body,
+html {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
+  height: 100%;
 }
 
 body {
@@ -18,6 +25,22 @@ body {
   text-align: center;
 }
 
+.question {
+  position: absolute;
+  /* display: none; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--clr-button-bckg);
+  padding: 60px 100px;
+  border-radius: 5px;
+}
+
 .option {
-  padding: 0.5em;
+  background-color: var(--clr-button);
+  cursor: pointer;
+  border: none;
+  margin: 5px;
+  padding: 5px 40px;
+  border-radius: 3px;
 }

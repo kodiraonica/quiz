@@ -25,5 +25,18 @@ questionData.forEach((q) => {
     button.setAttribute("class", "option");
     button.innerHTML = option;
     div.append(button);
+
+    if (option === q.answer) {
+      button.setAttribute("data-correct", true);
+    }
+  });
+});
+
+const buttons = document.getElementsByClassName("option");
+Array.from(buttons).forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.getAttribute("data-correct")) {
+      alert("correct");
+    } else alert("incorrect");
   });
 });
