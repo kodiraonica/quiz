@@ -2,3 +2,18 @@
 https://coolors.co/2f4858-33658a-86bbd8-f6ae2d-f26419
 */
 
+:root {
+  --clr-bckg: #33658a;
+}
+
+* {
+  padding: 0;
+  /* height: 100%; */
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--clr-bckg);
+  color: white;
+  text-align: center;
+}
