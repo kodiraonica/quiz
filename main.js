@@ -93,7 +93,7 @@ Array.from(buttons).forEach((button) =>{
         currentQuestion ++;
         questions[currentQuestion].style.display = "block";
 
-        //reset interval
+        // reset interval
         clearInterval(interval); 
         timer.innerHTML = 10;
         startInterval();
