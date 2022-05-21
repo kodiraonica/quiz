@@ -76,5 +76,10 @@ startInterval();
 function startInterval() {
   interval = setInterval(() => {
     if (timer.innerHTML > 0) timer.innerHTML = timer.innerHTML - 1;
+    else {
+      Array.from(buttons).forEach((button) =>
+        button.setAttribute("disabled", true)
+      );
+    }
   }, 1000);
 }
