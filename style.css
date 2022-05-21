@@ -27,7 +27,7 @@ body {
 
 .question {
   position: absolute;
-  /* display: none; */
+  display: none;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -43,4 +43,13 @@ body {
   margin: 5px;
   padding: 5px 40px;
   border-radius: 3px;
+}
+
+h3 {
+  font-size: 5rem;
+  position: fixed;
+  left: 30px;
+  top: 30px;
+  margin-top: 0;
+  margin-bottom: 0;
 }
