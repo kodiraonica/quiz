@@ -17,6 +17,40 @@ body {
     background-color:#33658A;
     color:#fff;
     text-align: center;
+    margin:0;  
 }
 
+.question{
+
+    position:absolute;
+    top:50%;
+    left:50%;   
+    transform: translate(-50%, -50%);  /**/
+    background-color: #86bbd8;
+    padding: 60px 100px;
+    border-radius: 5px;
+    display:none;
+}
+
+.option{
+    background-color: #f6ae2d;
+    cursor:pointer;
+    border:none;
+    margin:5px;
+    padding:5px 40px;
+    border-radius:3px;
+}
+
+h3{
+    font-size: 5rem;
+    position:fixed;
+    left:30px;
+    top:30px;
+    margin-top:0;
+    margin-bottom:0;
+}
+
+button:disabled{
+    cursor:not-allowed;
+}
 
