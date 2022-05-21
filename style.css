@@ -17,3 +17,7 @@ body {
   color: white;
   text-align: center;
 }
+
+.option {
+  padding: 0.5em;
+}
