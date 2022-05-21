@@ -8,7 +8,7 @@ https://coolors.co/2f4858-33658a-86bbd8-f6ae2d-f26419
 
 * {
   padding: 0;
-  /* height: 100%; */
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -16,4 +16,8 @@ body {
   background-color: var(--clr-bckg);
   color: white;
   text-align: center;
+}
+
+.option {
+  padding: 0.5em;
 }
