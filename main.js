@@ -1,12 +1,13 @@
 const questionsData = [
 		{
-			question: "Kako se zoves?"
-			options: ["Stef","Jura","Leon"]
+			question: "Kako se zoves?",
+			options: ["Stef","Jura","Leon"],
 			answer: "Leon"
 		},
+		
 		{
-			question:"Kako se prezivas?"
-			options:["Repalust", "Novak", "Horvat"]
+			question:"Kako se prezivas?",
+			options:["Repalust", "Novak", "Horvat"],
 			answer: "Repalust"
 		}
 ]
