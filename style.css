@@ -11,9 +11,43 @@ body{
 html, body {
 	padding: 0;
 	height: 100%;
+	margin: 0;
 }
 
 *{
 	box-sizing: border-box;
 }
 
+.question{
+	position: absolute;
+	top:  50%;
+	left: 50%;
+	transform:  translate(-50%, -50%);
+	background-color: #86BBD8 ;
+	padding:  60px 100px;
+	border-radius:  5px;
+	display:  none;
+
+}
+
+.option{
+	background-color: #F6AE2D;
+	cursor:  pointer;
+	border: none;
+	margin: 5px;
+	padding: 5px 40px;
+	border-radius: 3px;
+}
+
+h3 {
+	font-size: 5rem;
+	positon: fixed;
+	left: 30px;
+	top: 30px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+button:disable{
+	cursor:  not-allowed;
+}
