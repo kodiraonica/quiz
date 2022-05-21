@@ -2,3 +2,17 @@
 https://coolors.co/2f4858-33658a-86bbd8-f6ae2d-f26419
 */
 
+body {
+    background-color: #33658A;
+    color: #fff;
+    text-align: center;
+}
+
+html, body {
+    padding: 0;
+    height: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
