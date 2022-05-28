@@ -22,62 +22,87 @@ const questionsData = [
 ];
 let currentQuestion = 0;
 let interval;
-
 const timer = document.createElement("h3");
-timer.innerHTML = 10;
-document.body.append(timer);
-
-createResetButton();
-
-questionsData.forEach((q) => {
-  const div = document.createElement("div");
-  div.setAttribute("class", "question");
-  document.body.append(div);
-  const h2 = document.createElement("h2");
-  h2.innerHTML = q.question;
-  div.append(h2);
-
-  q.options.forEach((option) => {
-    const button = document.createElement("button");
-    button.setAttribute("class", "option");
-    button.innerHTML = option;
-    div.append(button);
-
-    if (option === q.answer) {
-      button.setAttribute("data-correct", true);
-    }
-  })
-});
-
 const buttons = document.getElementsByClassName("option");
 const questions = document.getElementsByClassName("question");
-questions[currentQuestion].style.display = "block";
-Array.from(buttons).forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.getAttribute("data-correct")) {
-      alert("correct");
-    } else {
-      alert("incorrect");
-    }
-    if (currentQuestion < questions.length - 1) {
-      showNewQuestion()
-    } else {
-      alert("no more questions");
-      clearInterval(interval);
-    }
+const buttonStart = document.createElement("button");
+
+createStartButton();
+
+function initGame() {
+  buttonStart.remove();
+  createResetButton();
+  createTimer();
+  showNewQuestion();
+  onAnswerClick();
+}
+
+function createStartButton() {
+  buttonStart.setAttribute("class", "btn-start");
+  buttonStart.innerHTML = "Start quiz";
+  document.body.append(buttonStart);
+  buttonStart.addEventListener("click", initGame);
+}
+
+function onAnswerClick() {
+  Array.from(buttons).forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.getAttribute("data-correct")) {
+        alert("correct");
+      } else {
+        alert("incorrect");
+      }
+      if (currentQuestion < questions.length - 1) {
+        showNewQuestion();
+      } else {
+        alert("no more questions");
+        clearInterval(interval);
+      }
+    })
   });
-});
+}
 
 function showNewQuestion() {
-  questions[currentQuestion].style.display = "none";
-  currentQuestion++;
+  questionsData.forEach((q) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "question");
+    document.body.append(div);
+    const h2 = document.createElement("h2");
+    h2.innerHTML = q.question;
+    div.append(h2);
+
+    q.options.forEach((option) => {
+      const button = document.createElement("button");
+      button.setAttribute("class", "option");
+      button.innerHTML = option;
+      div.append(button);
+
+      if (option === q.answer) {
+        button.setAttribute("data-correct", true);
+      }
+    });
+  });
+
   questions[currentQuestion].style.display = "block";
-  
-  // reset interval
+}
+
+  function createTimer() {
+    timer.innerHTML = 10;
+    document.body.append(timer);
+    startInterval();
+  }
+
+  function showNewQuestion() {
+    questions[currentQuestion].style.display = "none";
+    currentQuestion++;
+    questions[currentQuestion].style.display = "block";
+
+    // reset interval
   clearInterval(interval);
   timer.innerHTML = 10;
   startInterval();
 }
+
 
 function createResetButton() {
   const resetButton = document.createElement("button");
@@ -92,11 +117,12 @@ function createResetButton() {
     questions[currentQuestion].style.display = "none";
     currentQuestion = 0;
     questions[currentQuestion].style.display = "block";
-    Array.from(buttons).fromEach((button) => button.removeAttribute("disabled"));
-  })
+    Array.from(buttons).fromEach((button) =>
+      button.removeAttribute("disabled")
+    );
+  });
 }
 
-startInterval();
 function startInterval() {
   interval = setInterval(() => {
     if (timer.innerHTML > 0) {
