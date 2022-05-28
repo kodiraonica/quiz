@@ -126,7 +126,7 @@ function createResetButton() {
     questions[currentQuestion].style.display = "none";
     currentQuestion = 0;
     questions[currentQuestion].style.display = "block";
-    Array.from(buttons).fromEach((button) => button.removeAttribute("disabled"));
+    Array.from(buttons).forEach((button) => button.removeAttribute("disabled"));
     score = 0;
     updateScore();
   });
