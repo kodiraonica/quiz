@@ -22,56 +22,80 @@ const questionData = [
   },
 ];
 
+//globalne varijable
 let currentQuestion = 0;
 let interval;
-const questions = document.getElementsByClassName("question");
-
 const timer = document.createElement("h3");
-timer.innerHTML = 10;
-document.body.append(timer);
+const questions = document.getElementsByClassName("question");
+const buttons = document.getElementsByClassName("option");
+const buttonStart = document.createElement("button");
 
-createResetButton();
-questionData.forEach((q) => {
-  const div = document.createElement("div");
-  div.setAttribute("class", "question");
-  document.body.append(div);
-  const h2 = document.createElement("h2");
-  h2.innerHTML = q.question;
-  div.append(h2);
+createStartButton();
+//funkcije
+function initGame() {
+  buttonStart.remove();
+  createResetButton();
+  createTimer();
+  showQuestions();
+  onAnswerClick();
+}
 
-  q.options.forEach((option) => {
-    const button = document.createElement("button");
-    button.setAttribute("class", "option");
-    button.innerHTML = option;
-    div.append(button);
+function createStartButton() {
+  buttonStart.setAttribute("class", "btn-start");
+  buttonStart.innerHTML = "Start Quiz";
+  document.body.append(buttonStart);
+  buttonStart.addEventListener("click", initGame);
+}
 
-    if (option === q.answer) {
-      button.setAttribute("data-correct", true);
-    }
-    Array.from(questions).forEach((question) => {
-      question.append(button);
-      questions[currentQuestion].style.display = "block";
+function onAnswerClick() {
+  Array.from(buttons).forEach((button) => {
+    button.addEventListener("click", () => {
+      if (button.getAttribute("data-correct")) {
+        alert("correct");
+      } else alert("incorrect");
+
+      if (currentQuestion < questions.length - 1) {
+        showNewQuestion();
+      } else {
+        //znači da smo došli do kraja pitanja
+        alert("no more questions");
+        clearInterval(interval);
+      }
     });
   });
-});
+}
 
-const buttons = document.getElementsByClassName("option");
+function showQuestions() {
+  questionData.forEach((q) => {
+    const div = document.createElement("div");
+    div.setAttribute("class", "question");
+    document.body.append(div);
+    const h2 = document.createElement("h2");
+    h2.innerHTML = q.question;
+    div.append(h2);
 
-Array.from(buttons).forEach((button) => {
-  button.addEventListener("click", () => {
-    if (button.getAttribute("data-correct")) {
-      alert("correct");
-    } else alert("incorrect");
+    q.options.forEach((option) => {
+      const button = document.createElement("button");
+      button.setAttribute("class", "option");
+      button.innerHTML = option;
+      div.append(button);
 
-    if (currentQuestion < questions.length - 1) {
-      showNewQuestion();
-    } else {
-      //znači da smo došli do kraja pitanja
-      alert("no more questions");
-      clearInterval(interval);
-    }
+      if (option === q.answer) {
+        button.setAttribute("data-correct", true);
+      }
+      Array.from(questions).forEach((question) => {
+        question.append(button);
+        questions[currentQuestion].style.display = "block";
+      });
+    });
   });
-});
+}
+
+function createTimer() {
+  timer.innerHTML = 10;
+  document.body.append(timer);
+  startInterval();
+}
 
 function showNewQuestion() {
   // ovim pokazujemo iduca pitanja
@@ -102,7 +126,6 @@ function createResetButton() {
   });
 }
 
-startInterval();
 function startInterval() {
   interval = setInterval(() => {
     if (timer.innerHTML > 0) timer.innerHTML = timer.innerHTML - 1;
