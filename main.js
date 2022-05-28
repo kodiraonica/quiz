@@ -67,6 +67,9 @@ Array.from(buttons).forEach((button) => {
       clearInterval(interval);
       timer.innerHTML = 10;
       startInterval();
+    } else {
+      alert("no more questions");
+      clearInterval(interval);
     }
   })
 });
