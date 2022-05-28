@@ -40,16 +40,54 @@ const questionsData =[
 
 let currentQuestion = 0;   //counter - koje pitanje se pokazuje
 let interval;               //inteval - let - mijenjanje vrijednosti poslije
-//kreiranje Timera
-
 
 const timer = document.createElement("h3");
-timer.innerHTML = 10;
-document.body.append(timer);
+const buttons = document.getElementsByClassName("option");
+const questions = document.getElementsByClassName("question");
+const buttonStart = document.createElement("button");
 
-//pozovi funkciju button - kreiranje
-createResetButton();
 
+
+createStartButton();
+//initialize game
+function initGame(){
+    buttonStart.remove()
+    createResetButton();
+    createTimer();
+    showQuestions();
+    onAnswerClick();
+}
+
+function createStartButton (){
+    buttonStart.setAttribute("class","btn-start");
+    buttonStart.innerHTML="Start Quiz";
+    document.body.append(buttonStart);
+    buttonStart.addEventListener("click", initGame)
+}
+
+function onAnswerClick(){
+    Array.from(buttons).forEach((button) =>{
+        button.addEventListener("click", () =>{
+           if(button.getAttribute("data-correct")){
+               alert("correct - tocno")
+    
+           }else{
+               alert("incorrect - netocno")
+           }
+    
+           if(currentQuestion < questions.length -1){
+            showNewQuestion();
+           }else{
+               alert("no more questions");
+               clearInterval(interval);
+           }
+        })
+    });
+}
+
+
+
+function showQuestions(){
 questionsData.forEach((q) => {
     const div = document.createElement("div");
     div.setAttribute("class","question");  
@@ -78,26 +116,14 @@ questionsData.forEach((q) => {
 const buttons = document.getElementsByClassName("option");
 const questions = document.getElementsByClassName("question");
 questions[currentQuestion].style.display ="block";
+}
 
-Array.from(buttons).forEach((button) =>{
-    
-    button.addEventListener("click", () =>{
-       if(button.getAttribute("data-correct")){
-           alert("correct - tocno")
+function createTimer(){
+    timer.innerHTML = 10;
+    document.body.append(timer);
+    startInterval()
+}
 
-
-       }else{
-           alert("incorrect - netocno")
-       }
-
-       if(currentQuestion < questions.length -1){
-        showNewQuestion();
-       }else{
-           alert("no more questions");
-           clearInterval(interval);
-       }
-    })
-});
 
 function showNewQuestion(){
         questions[currentQuestion].style.display = "none";
@@ -140,7 +166,6 @@ function startInterval() {
      }
 }, 1000);
 }
-
 
 
 
