@@ -47,6 +47,8 @@ const timer = document.createElement("h3");
 timer.innerHTML = 10;
 document.body.append(timer);
 
+//pozovi funkciju button - kreiranje
+createResetButton();
 
 questionsData.forEach((q) => {
     const div = document.createElement("div");
@@ -89,6 +91,15 @@ Array.from(buttons).forEach((button) =>{
        }
 
        if(currentQuestion < questions.length -1){
+        showNewQuestion();
+       }else{
+           alert("no more questions");
+           clearInterval(interval);
+       }
+    })
+});
+
+function showNewQuestion(){
         questions[currentQuestion].style.display = "none";
         currentQuestion ++;
         questions[currentQuestion].style.display = "block";
@@ -97,13 +108,26 @@ Array.from(buttons).forEach((button) =>{
         clearInterval(interval); 
         timer.innerHTML = 10;
         startInterval();
-       }else{
-           alert("no more questions");
-           clearInterval(interval);
-       }
-    })
-});
+}
 
+//kreiranje-reset-buttona
+function createResetButton(){
+    const resetButton = document.createElement("button");
+    resetButton.innerHTML="Reset Game";
+    resetButton.setAttribute("class","btn-reset");
+    document.body.append(resetButton)
+
+    //event listener na button, zaustavi timer
+    resetButton.addEventListener("click",() =>{
+        clearInterval(interval);
+        timer.innerHTML = 10;
+        startInterval();
+        questions[currentQuestion].style.display = "none";
+        currentQuestion = 0;
+        questions[currentQuestion].style.display = "block";
+        Array.from(buttons).forEach((button) => button.removeAttribute("disabled"))
+    })
+}
 
 startInterval();
 function startInterval() {
