@@ -56,6 +56,7 @@ function initGame(){
     createTimer();
     showQuestions();
     onAnswerClick();
+    
 }
 
 function createStartButton (){
