@@ -27,6 +27,8 @@ const timer = document.createElement("h3");
 timer.innerHTML = 10;
 document.body.append(timer);
 
+createResetButton();
+
 questionsData.forEach((q) => {
   const div = document.createElement("div");
   div.setAttribute("class", "question");
@@ -57,22 +59,42 @@ Array.from(buttons).forEach((button) => {
     } else {
       alert("incorrect");
     }
-
     if (currentQuestion < questions.length - 1) {
-      questions[currentQuestion].style.display = "none";
-      currentQuestion++;
-      questions[currentQuestion].style.display = "block";
-
-      // reset interval
-      clearInterval(interval);
-      timer.innerHTML = 10;
-      startInterval();
+      showNewQuestion()
     } else {
       alert("no more questions");
       clearInterval(interval);
     }
-  })
+  });
 });
+
+function showNewQuestion() {
+  questions[currentQuestion].style.display = "none";
+  currentQuestion++;
+  questions[currentQuestion].style.display = "block";
+  
+  // reset interval
+  clearInterval(interval);
+  timer.innerHTML = 10;
+  startInterval();
+}
+
+function createResetButton() {
+  const resetButton = document.createElement("button");
+  resetButton.innerHTML = "reset game";
+  resetButton.setAttribute("class", "btn-reset");
+  document.body.append(resetButton);
+
+  resetButton.addEventListener("click", () => {
+    clearInterval(interval);
+    timer.innerHTML = 10;
+    startInterval();
+    questions[currentQuestion].style.display = "none";
+    currentQuestion = 0;
+    questions[currentQuestion].style.display = "block";
+    Array.from(buttons).fromEach((button) => button.removeAttribute("disabled"));
+  })
+}
 
 startInterval();
 function startInterval() {
