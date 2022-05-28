@@ -50,6 +50,7 @@ const scoreElement = document.createElement("h4");
 
 
 createStartButton();
+getScoreFromLocalStorage();
 //initialize game
 function initGame(){
     buttonStart.remove()
