@@ -25,16 +25,20 @@ const questionData = [
 //globalne varijable
 let currentQuestion = 0;
 let interval;
+let score = 0;
 const timer = document.createElement("h3");
 const questions = document.getElementsByClassName("question");
 const buttons = document.getElementsByClassName("option");
 const buttonStart = document.createElement("button");
+const scoreElement = document.createElement("h4");
 
 createStartButton();
+
 //funkcije
 function initGame() {
   buttonStart.remove();
   createResetButton();
+  createScoreElement();
   createTimer();
   showQuestions();
   onAnswerClick();
@@ -52,7 +56,13 @@ function onAnswerClick() {
     button.addEventListener("click", () => {
       if (button.getAttribute("data-correct")) {
         alert("correct");
-      } else alert("incorrect");
+        score++;
+        updateScore();
+      } else {
+        alert("incorrect");
+        score--;
+        updateScore();
+      }
 
       if (currentQuestion < questions.length - 1) {
         showNewQuestion();
@@ -123,6 +133,8 @@ function createResetButton() {
     currentQuestion = 0;
     questions[currentQuestion].style.display = "block";
     Array.from(buttons).forEach((button) => button.removeAttribute("disabled"));
+    score = 0;
+    updateScore();
   });
 }
 
@@ -136,4 +148,22 @@ function startInterval() {
       );
     }
   }, 1000);
+}
+
+function createScoreElement() {
+  scoreElement.innerHTML = "Your score is ";
+  document.body.append(scoreElement);
+}
+
+function updateScore() {
+  scoreElement.innerHTML = `Your score is ${score}`;
+  localStorage.setItem("score", score);
+}
+
+function getScoreFromLocalStorage() {
+  const userScore = localStorage.getItem("score");
+  //if (userScore) {
+  //ovo možemo umjesto if-a
+  userScore && alert(`Your last score was ${userScore}`);
+  //}
 }
