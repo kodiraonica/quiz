@@ -24,6 +24,7 @@ const questionData = [
 
 let currentQuestion = 0;
 let interval;
+const questions = document.getElementsByClassName("question");
 
 const timer = document.createElement("h3");
 timer.innerHTML = 10;
@@ -46,13 +47,14 @@ questionData.forEach((q) => {
     if (option === q.answer) {
       button.setAttribute("data-correct", true);
     }
+    Array.from(questions).forEach((question) => {
+      question.append(button);
+      questions[currentQuestion].style.display = "block";
+    });
   });
 });
 
 const buttons = document.getElementsByClassName("option");
-const questions = document.getElementsByClassName("question");
-// ovime prikazujemo prvo pitanje
-questions[currentQuestion].style.display = "block";
 
 Array.from(buttons).forEach((button) => {
   button.addEventListener("click", () => {
@@ -65,9 +67,14 @@ Array.from(buttons).forEach((button) => {
       questions[currentQuestion].style.display = "none";
       currentQuestion++;
       questions[currentQuestion].style.display = "block";
+
+      //reset interval
       clearInterval(interval);
       timer.innerHTML = 10;
-      startInterval();
+    } else {
+      //znači da smo došli do kraja pitanja
+      alert("no more questions");
+      clearInterval(interval);
     }
   });
 });
@@ -77,6 +84,7 @@ function startInterval() {
   interval = setInterval(() => {
     if (timer.innerHTML > 0) timer.innerHTML = timer.innerHTML - 1;
     else {
+      clearInterval(interval);
       Array.from(buttons).forEach((button) =>
         button.setAttribute("disabled", true)
       );
