@@ -22,12 +22,15 @@ const questionsData = [
 ];
 let currentQuestion = 0;
 let interval;
+let score = 0;
 const timer = document.createElement("h3");
 const buttons = document.getElementsByClassName("option");
 const questions = document.getElementsByClassName("question");
 const buttonStart = document.createElement("button");
+const scoreElement = document.createElement("h4");
 
 createStartButton();
+getScoreFromLocalStorage();
 
 function initGame() {
   buttonStart.remove();
@@ -35,6 +38,7 @@ function initGame() {
   createTimer();
   showQuestion();
   onAnswerClick();
+  createScoreElement();
 }
 
 function createStartButton() {
@@ -49,9 +53,14 @@ function onAnswerClick() {
     button.addEventListener("click", () => {
       if (button.getAttribute("data-correct")) {
         alert("correct");
+        score++;
+        updateScore();
       } else {
         alert("incorrect");
+        score--;
+        updateScore();
       }
+
       if (currentQuestion < questions.length - 1) {
         showNewQuestion();
       } else {
@@ -133,4 +142,22 @@ function startInterval() {
       );
     }
   }, 1000);
+}
+
+function createScoreElement() {
+  scoreElement.innerHTML = "Your score";
+  document.body.append(scoreElement);
+}
+
+function updateScore() {
+  scoreElement.innerHTML = `Your score is ${score}`;
+  localStorage.setItem("score", score);
+}
+
+function getScoreFromLocalStorage(){
+  const userScore = localStorage.getItem("score");
+  userScore && alert(`Your last score was ${userScore}`);
+  // if (userScore) {
+  //   alert(`Your last score was ${userScore}`);
+  // }
 }
