@@ -33,7 +33,7 @@ function initGame() {
   buttonStart.remove();
   createResetButton();
   createTimer();
-  showNewQuestion();
+  showQuestion();
   onAnswerClick();
 }
 
@@ -62,7 +62,7 @@ function onAnswerClick() {
   });
 }
 
-function showNewQuestion() {
+function showQuestion() {
   questionsData.forEach((q) => {
     const div = document.createElement("div");
     div.setAttribute("class", "question");
