@@ -56,7 +56,7 @@ function initGame(){
     createTimer();
     showQuestions();
     onAnswerClick();
-    
+
 }
 
 function createStartButton (){
@@ -156,7 +156,7 @@ function createResetButton(){
     })
 }
 
-startInterval();
+//startInterval();  //duplic
 function startInterval() {
 //timer prosla vrijednost - 1
     interval = setInterval(() =>{
