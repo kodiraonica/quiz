@@ -50,3 +50,20 @@ h3 {
 button:disabled {
     cursor: not-allowed;
 }
+
+.btn-reset {
+    position: absolute;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 200px;
+    background-color: #2F4858;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 15px 40px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-size: 16px;
+}
