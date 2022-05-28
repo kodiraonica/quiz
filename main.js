@@ -40,12 +40,13 @@ const questionsData =[
 
 let currentQuestion = 0;   //counter - koje pitanje se pokazuje
 let interval;               //inteval - let - mijenjanje vrijednosti poslije
+let score = 0;              //
 
 const timer = document.createElement("h3");
 const buttons = document.getElementsByClassName("option");
 const questions = document.getElementsByClassName("question");
 const buttonStart = document.createElement("button");
-
+const scoreElement = document.createElement("h4");
 
 
 createStartButton();
@@ -53,6 +54,7 @@ createStartButton();
 function initGame(){
     buttonStart.remove()
     createResetButton();
+    createScoreElement();
     createTimer();
     showQuestions();
     onAnswerClick();
@@ -71,9 +73,15 @@ function onAnswerClick(){
         button.addEventListener("click", () =>{
            if(button.getAttribute("data-correct")){
                alert("correct - tocno")
+               score++
+               updateScore();
+               //console.log(score);
     
            }else{
                alert("incorrect - netocno")
+               score--
+               updateScore();
+               // console.log(score);
            }
     
            if(currentQuestion < questions.length -1){
@@ -153,6 +161,8 @@ function createResetButton(){
         currentQuestion = 0;
         questions[currentQuestion].style.display = "block";
         Array.from(buttons).forEach((button) => button.removeAttribute("disabled"))
+        score = 0;
+        updateScore();
     })
 }
 
@@ -171,3 +181,19 @@ function startInterval() {
 
 
 
+function createScoreElement(){
+    scoreElement.innerHTML = "Your score is ";
+    document.body.append(scoreElement);
+}
+
+function updateScore(){
+    scoreElement.innerHTML =`Your score is ${score}`;
+    localStorage.setItem("score",score);
+}
+
+//povijest score-a zadnjeg, ako postoji unutar local storage-a
+function getScoreFromLocalStorage(){
+    const userScore = localStorage.getItem("score"); //key pod vrijednost "score"
+    userScore && alert(`Your last score was ${userScore}`);
+   
+}
